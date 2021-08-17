@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class MyConstant {
   // Genernal
   static String appName = 'Let go';
-  static String domain = 'https://8491103d6a78.ngrok.io';
+  static String domain = 'https://681476d7d185.ngrok.io';
 
   // Route
   static String routeLogin = '/Homescreen';

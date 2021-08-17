@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:letgo/utility/my_constant.dart';
 import 'package:letgo/utility/my_dialog.dart';
 import 'package:flutter/src/material/bottom_navigation_bar_theme.dart';
+import 'package:letgo/widgets/show_image.dart';
+import 'package:letgo/widgets/show_progress.dart';
 
 class indexScreen extends StatefulWidget {
   const indexScreen({Key? key}) : super(key: key);
@@ -60,6 +63,9 @@ class _indexScreenState extends State<indexScreen> {
       lng = position.longitude;
       print('lat =$lat&lng=$lng');
     });
+    if (LatLng == Null) {
+      ShowImage(path: MyConstant.image1);
+    }
   }
 
   Future<Position?> findPosition() async {
@@ -74,13 +80,19 @@ class _indexScreenState extends State<indexScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: showBottomNavigationBar(),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-        child: Column(
-          children: <Widget>[
-            showMap(),
-          ],
+      // bottomNavigationBar: showBottomNavigationBar(),
+      body: SingleChildScrollView(
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: lat == null
+              ? ShowProgress()
+              : Column(
+                  children: <Widget>[
+                    showMap(),
+                    showBottomNavigationBar(),
+                  ],
+                ),
         ),
       ),
     );
@@ -114,7 +126,7 @@ class _indexScreenState extends State<indexScreen> {
     CameraPosition cameraPosition = CameraPosition(target: latLng, zoom: 18);
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
+      height: (724),
       child: GoogleMap(
         initialCameraPosition: cameraPosition,
         mapType: MapType.terrain,
