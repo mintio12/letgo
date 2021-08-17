@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "196950647404",
+    "project_id": "loginlet-7a1b9",
+    "storage_bucket": "loginlet-7a1b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196950647404:android:89f11f1675cdbd56562e49",
+        "android_client_info": {
+          "package_name": "com.flutterthailand.letgo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "196950647404-canb0o0u9ula08ocq2t6jha1j38b66n9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPPs9avB8ZkVOrYgObBw-mxIn-WTrFfzY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "196950647404-canb0o0u9ula08ocq2t6jha1j38b66n9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
