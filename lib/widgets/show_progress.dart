@@ -5,6 +5,11 @@ class ShowProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: CircularProgressIndicator());
+    return Center(
+        child: CircularProgressIndicator(
+      strokeWidth: 8,
+      backgroundColor: Colors.white12,
+      valueColor: new AlwaysStoppedAnimation<Color>(Colors.orange.shade400),
+    ));
   }
 }

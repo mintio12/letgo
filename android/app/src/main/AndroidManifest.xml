@@ -6,7 +6,7 @@
         android:label="letgo"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyDL4KHoigjZW0XVZ_FuG_CGei6o85Hmx3g"/>
+               android:value="AIzaSyCeRblneqRxZ7RoQ6Zsq754pGzwvQI2ZMQ"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:math';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -37,9 +36,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0, // 1
         title: Padding(
-          padding: const EdgeInsets.only(left: 65),
+          padding: const EdgeInsets.only(left: 90),
           child: Text(
-            'Create Account',
+            'สมัครสมาชิก',
             style: TextStyle(
               color: Colors.black, // 2
             ),
@@ -105,14 +104,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Row backLogin(BuildContext context) {
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Text('Already a member ?'),
+      Text('เป็นสมาชิกอยู่แล้ว ?'),
       TextButton(
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return Homescreen();
           }));
         },
-        child: Text('Login'),
+        child: Text('เข้าสู่ระบบ'),
         style: TextButton.styleFrom(primary: Colors.orange[700]),
       )
     ]);
@@ -126,11 +125,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
           height: 60,
           child: ElevatedButton(
             onPressed: () {
-              print('insert ot database');
-              UploadPictureAndInsertData();
-              if (formKey.currentState!.validate()) {}
+              if (formKey.currentState!.validate()) {
+                print('insert ot database');
+
+                UploadPictureAndInsertData();
+              }
             },
-            child: Text('Register'),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+              child: Text(
+                'สมัครสมาชิก',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
             style: MyConstant().myButtonStyle(),
           ),
         )
@@ -244,12 +253,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
           controller: nameController,
           validator: (value) {
             if (value!.isEmpty) {
-              return 'please insert Name';
+              return 'กรุณากรอก ชื่อ';
             } else {}
           },
           decoration: InputDecoration(
               prefixIcon: Icon(Icons.account_circle_outlined),
-              labelText: 'Name',
+              labelText: 'ชื่อ',
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(width: 1, color: Colors.orange),
                 borderRadius: BorderRadius.circular(10),
@@ -274,12 +283,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
           controller: phoneController,
           validator: (value) {
             if (value!.isEmpty) {
-              return 'please insert Phone number';
+              return 'กรุณากรอก เบอร์โทรศัพท์';
             } else {}
           },
           decoration: InputDecoration(
               prefixIcon: Icon(Icons.phone),
-              labelText: 'phone',
+              labelText: 'เบอร์โทรศัพท์',
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(width: 1, color: Colors.orange),
                 borderRadius: BorderRadius.circular(10),
@@ -304,12 +313,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
           controller: emailController,
           validator: (value) {
             if (value!.isEmpty) {
-              return 'please insert email';
-            } else {}
+              return 'กรุณากรอก อีเมล';
+            } else {
+              if (value.contains("@")) {
+                return 'รูปแบบอีเมลไม่ถูกต้อง';
+              } else {}
+            }
           },
+          // value!.isEmpty || !value.contains("@") ? "กรุณากรอก อีเมล" : null,},
           decoration: InputDecoration(
               prefixIcon: Icon(Icons.email_outlined),
-              labelText: 'E-mail',
+              labelText: 'อีเมล',
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(width: 1, color: Colors.orange),
                 borderRadius: BorderRadius.circular(10),
@@ -334,13 +348,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
           controller: passwordController,
           validator: (value) {
             if (value!.isEmpty) {
-              return 'please insert Password';
+              return 'กรุณากรอก รหัสผ่าน';
             } else {}
           },
           obscureText: true,
           decoration: InputDecoration(
               prefixIcon: Icon(Icons.lock_outline),
-              labelText: 'Password',
+              labelText: 'รหัสผ่าน',
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(width: 1, color: Colors.orange),
                 borderRadius: BorderRadius.circular(10),

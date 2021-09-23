@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 class MyConstant {
   // Genernal
   static String appName = 'Let go';
-  static String domain = 'https://681476d7d185.ngrok.io';
+  static String domain =
+      'https://5c30-2403-6200-89a7-488d-7cc7-3d3e-19b7-790d.ngrok.io';
 
   // Route
-  static String routeLogin = '/Homescreen';
-  static String routeCreateAccount = '/RegisterScreen';
-  static String routeIndex = '/indexScreen';
+  static String routeLogin = '/login';
+  static String routeCreateAccount = '/register';
+  static String routeIndex = '/home';
+  static String routeCall = '/sentLocation';
 
   // Image
   static String image1 = 'assets/images/letgo.png';
@@ -37,10 +39,10 @@ class MyConstant {
 
   // Style
   TextStyle h1Style() => TextStyle(
-        fontSize: 24,
-        color: dark,
-        fontWeight: FontWeight.bold,
-      );
+      fontSize: 24,
+      color: dark,
+      fontWeight: FontWeight.bold,
+      fontFamily: 'SanamDeklen');
   TextStyle h2Style() => TextStyle(
         fontSize: 18,
         color: dark,

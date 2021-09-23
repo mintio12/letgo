@@ -8,8 +8,10 @@ import 'package:letgo/screen/index.dart';
 import 'package:letgo/screen/register.dart';
 import 'package:letgo/utility/my_constant.dart';
 import 'package:letgo/utility/my_dialog.dart';
+import 'package:letgo/widgets/custom_pageRpte.dart';
 import 'package:letgo/widgets/show_image.dart';
 import 'package:letgo/widgets/show_title.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({Key? key}) : super(key: key);
@@ -50,14 +52,14 @@ class _HomescreenState extends State<Homescreen> {
 
   Row buildCreate(BuildContext context) {
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Text('Non Account ?'),
+      Text('ไม่ได้เป็นสมาชิกหรอ ?'),
       TextButton(
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return RegisterScreen();
           }));
         },
-        child: Text('Create Account'),
+        child: Text('สมัครสมาชิก'),
         style: TextButton.styleFrom(primary: Colors.orange[700]),
       )
     ]);
@@ -84,7 +86,16 @@ class _HomescreenState extends State<Homescreen> {
                 checkLogin(email: email, password: password);
               }
             },
-            child: Text('Login'),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+              child: Text(
+                'เข้าสู่ระบบ',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
           ),
         ),
       ],
@@ -97,19 +108,27 @@ class _HomescreenState extends State<Homescreen> {
     await Dio().get(apiCheckLogin).then((value) async {
       print('## value for API ==>> $value');
       if (value.toString() == 'null') {
-        MyDialog().normalDialog(context, '!! Alert !!', '$email is not member');
+        MyDialog()
+            .normalDialog(context, '!! เตือน !!', '$email ไม่ได้เป็นสมาชิก');
       } else {
         for (var item in json.decode(value.data)) {
           UserModel model = UserModel.fromMap(item);
           if (password == model.password) {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return indexScreen();
-            }));
+            SharedPreferences preferences =
+                await SharedPreferences.getInstance();
+            preferences.setString('email', model.email);
+            preferences.setString('name', model.name);
+
+            Navigator.push(
+                context,
+                CustomPageRoute(
+                  child: indexScreen(),
+                ));
             emailController.clear();
             passwordController.clear();
           } else {
             MyDialog()
-                .normalDialog(context, '!! Alert !!', 'Password is incorrect');
+                .normalDialog(context, '!! เตือน !!', 'รหัสผ่านไม่ถูกต้อง');
           }
         }
       }
@@ -127,7 +146,7 @@ class _HomescreenState extends State<Homescreen> {
               controller: emailController,
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Please fill Email';
+                  return 'กรุณากรอก อีเมล';
                 } else {
                   return null;
                 }
@@ -135,7 +154,7 @@ class _HomescreenState extends State<Homescreen> {
               cursorColor: Colors.orange[300],
               decoration: InputDecoration(
                 labelStyle: TextStyle(color: Colors.black),
-                labelText: 'Email',
+                labelText: 'อีเมล',
                 prefixIcon: Icon(
                   Icons.account_box_outlined,
                   color: Colors.black,
@@ -164,7 +183,7 @@ class _HomescreenState extends State<Homescreen> {
             child: TextFormField(
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Please fill Password';
+                  return 'กรุณากรอก รหัสผ่าน';
                 } else {
                   return null;
                 }
@@ -184,7 +203,7 @@ class _HomescreenState extends State<Homescreen> {
                         : Icon(Icons.remove_red_eye_outlined,
                             color: Colors.red)),
                 labelStyle: TextStyle(color: Colors.black),
-                labelText: 'Password',
+                labelText: 'รหัสผ่าน',
                 prefixIcon: Icon(
                   Icons.lock_outlined,
                   color: Colors.black,
