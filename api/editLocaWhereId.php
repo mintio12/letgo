@@ -15,19 +15,16 @@ if (!$link->set_charset("utf8")) {
     exit();
 	}
 
+
 if (isset($_GET)) {
 	if ($_GET['isAdd'] == 'true') {
-		$listid = $_GET['listid'];		
-		$avatar = $_GET['avatar'];
-		$name = $_GET['name'];
-		$phone = $_GET['phone'];
-		$des = $_GET['des'];
-		$lat = $_GET['lat'];
-		$lng = $_GET['lng'];
+			
+		$name = $_GET['name'];		
+		$listid = $_GET['listid'];	
 		
 		
 							
-		$sql = "INSERT INTO `localtion`(`id`,`listid`, `avatar`, `name`,`phone`,`des`, `lat`, `lng`) VALUES (Null,'$listid','$avatar','$name','$phone','$des','$lat','$lng')";
+		$sql = "UPDATE `localtion` SET `listid` = '1' WHERE name = '$name'";
 
 		$result = mysqli_query($link, $sql);
 
@@ -40,5 +37,6 @@ if (isset($_GET)) {
 	} else echo "Welcome Master UNG";
    
 }
+
 	mysqli_close($link);
 ?>

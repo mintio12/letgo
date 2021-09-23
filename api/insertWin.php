@@ -17,17 +17,15 @@ if (!$link->set_charset("utf8")) {
 
 if (isset($_GET)) {
 	if ($_GET['isAdd'] == 'true') {
-		$listid = $_GET['listid'];		
-		$avatar = $_GET['avatar'];
+				
 		$name = $_GET['name'];
 		$phone = $_GET['phone'];
-		$des = $_GET['des'];
-		$lat = $_GET['lat'];
-		$lng = $_GET['lng'];
-		
+		$motornum = $_GET['motornum'];
+		$avatar = $_GET['avatar'];
+		$winnum = $_GET['winnum'];
 		
 							
-		$sql = "INSERT INTO `localtion`(`id`,`listid`, `avatar`, `name`,`phone`,`des`, `lat`, `lng`) VALUES (Null,'$listid','$avatar','$name','$phone','$des','$lat','$lng')";
+		$sql = "INSERT INTO `windata`(`id`, `name`, `phone`, `motornum`, `avatar`, `winnum`) VALUES (Null,'$name','$phone','$motornum','$avatar','$winnum')";
 
 		$result = mysqli_query($link, $sql);
 
@@ -37,7 +35,7 @@ if (isset($_GET)) {
 			echo "false";
 		}
 
-	} else echo "Welcome Master UNG";
+	} else echo "Welcome Supachai";
    
 }
 	mysqli_close($link);

@@ -17,28 +17,30 @@ if (!$link->set_charset("utf8")) {
 
 if (isset($_GET)) {
 	if ($_GET['isAdd'] == 'true') {
-		$listid = $_GET['listid'];		
-		$avatar = $_GET['avatar'];
-		$name = $_GET['name'];
-		$phone = $_GET['phone'];
-		$des = $_GET['des'];
-		$lat = $_GET['lat'];
-		$lng = $_GET['lng'];
-		
-		
-							
-		$sql = "INSERT INTO `localtion`(`id`,`listid`, `avatar`, `name`,`phone`,`des`, `lat`, `lng`) VALUES (Null,'$listid','$avatar','$name','$phone','$des','$lat','$lng')";
+				
+		$qwinnum = $_GET['winnum'];
 
-		$result = mysqli_query($link, $sql);
+		$result = mysqli_query($link, "SELECT qwin.winnum,windata.name,windata.avatar
+			FROM qwin
+			INNER JOIN windata 
+			ON qwin.$qwinnum=windata.winnum
+			ORDER BY qwin.id");
 
 		if ($result) {
-			echo "true";
-		} else {
-			echo "false";
-		}
 
-	} else echo "Welcome Master UNG";
+			while($row=mysqli_fetch_assoc($result)){
+			$output[]=$row;
+
+			}	// while
+
+			echo json_encode($output);
+
+		} //if
+
+	} else echo "Welcome Supachai";	// if2
    
-}
+}	// if1
+
+
 	mysqli_close($link);
 ?>
